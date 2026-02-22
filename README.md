@@ -1,36 +1,129 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Minimal Agent-Ready Next.js Template
 
-## Getting Started
+Small, production-ready template for static marketing websites with a config-first editing model.
 
-First, run the development server:
+## Stack
+
+- Next.js (App Router) + TypeScript
+- Tailwind CSS
+- ESLint + Prettier
+
+## Run locally
+
+1. `npm install`
+2. `npm run dev`
+3. Open `http://localhost:3000`
+
+## Scripts
+
+- `npm run dev`
+- `npm run build`
+- `npm run start`
+- `npm run lint`
+- `npm run typecheck`
+
+## Generator patch workflow
+
+- Prefer editing `site.config.ts` for content and section ordering.
+- Add/modify section components only when a new section type is required.
+- Keep changes minimal and avoid config/dependency changes unless requested.
+- Before merging, run `npm run lint`, `npm run typecheck`, `npm run build`.
+
+## Vercel
+
+- Connect repo to Vercel via Git.
+- Build command: `npm run build`
+- Start command: `npm run start`
+
+## Contributing
+
+Recommended commit format:
+
+- `feat(template): ...`
+- `fix(template): ...`
+- `chore(template): ...`
+
+Use `.github/pull_request_template.md` to keep PR descriptions high-signal.# Website Service Template
+
+Production-ready, extensible Next.js App Router template for AI-generated marketing websites.
+
+## Stack
+
+- Next.js (App Router) + TypeScript
+- Tailwind CSS v4
+- ESLint + Prettier
+- Static-first architecture with optional DB stubs
+
+## Local development
+
+1. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+2. Create your env file:
+
+   ```bash
+   cp env.example .env.local
+   ```
+
+3. Start development server:
+
+   ```bash
+   npm run dev
+   ```
+
+4. Open `http://localhost:3000`.
+
+## Quality checks
+
+Run before creating commits or deploys:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run lint
+npm run typecheck
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Vercel deployment
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Push this repository to GitHub.
+2. Import the repo into Vercel.
+3. Keep build command as `npm run build`.
+4. Keep start command as `npm run start`.
+5. Set env vars as needed (`NEXT_PUBLIC_SITE_URL`, optional `DATABASE_URL`).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Generator patch workflow
 
-## Learn More
+The generator should only edit paths allowed in [docs/GENERATOR_GUIDE.md](docs/GENERATOR_GUIDE.md).
 
-To learn more about Next.js, take a look at the following resources:
+Typical flow:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Create a branch.
+2. Apply patch/diff output to allowed files.
+3. Validate path scope:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   ```bash
+   npm run validate:tree -- app/page.tsx components/sections/Hero.tsx lib/site.ts
+   ```
 
-## Deploy on Vercel
+4. Run checks:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   ```bash
+   npm run lint && npm run typecheck && npm run build
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+5. Commit and open PR.
+
+## Content model
+
+Primary content source is `lib/site.ts`.
+
+- Brand
+- Theme tokens
+- Navigation
+- Ordered section array (Hero, Features, CTA, Testimonials, FAQ, Footer)
+- SEO defaults
+
+Homepage rendering is config-driven in `app/page.tsx`.
