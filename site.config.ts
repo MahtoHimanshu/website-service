@@ -1,4 +1,5 @@
-// last updated from connector: 2026-02-22T15:09:31.120Z
+// last updated from connector: 2026-02-22T17:25:57.152Z
+// webforge: Heyllo
 export type Radius = "sm" | "md" | "lg";
 
 export type NavItem = {
