@@ -23,13 +23,46 @@ export type FeaturesSection = {
   items: Array<{ title: string; description: string }>;
 };
 
+export type PricingSection = {
+  type: "pricing";
+  title: string;
+  tiers: Array<{ name: string; price: string; features: string[]; cta: string; highlighted?: boolean }>;
+};
+
+export type TestimonialsSection = {
+  type: "testimonials";
+  title: string;
+  items: Array<{ quote: string; author: string; role: string }>;
+};
+
+export type CtaBannerSection = {
+  type: "cta_banner";
+  title: string;
+  subtitle?: string;
+  buttonLabel: string;
+  buttonHref: string;
+};
+
+export type FaqSection = {
+  type: "faq";
+  title: string;
+  items: Array<{ question: string; answer: string }>;
+};
+
 export type FooterSection = {
   type: "footer";
   text: string;
   links: NavItem[];
 };
 
-export type SiteSection = HeroSection | FeaturesSection | FooterSection;
+export type SiteSection =
+  | HeroSection
+  | FeaturesSection
+  | PricingSection
+  | TestimonialsSection
+  | CtaBannerSection
+  | FaqSection
+  | FooterSection;
 
 export type SiteConfig = {
   site: {
